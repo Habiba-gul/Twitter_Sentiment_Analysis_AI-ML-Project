@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Sentiment Analyzer</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+      
+        <header class="header">
+    <img src="twitter-logo.webp" alt="Twitter Logo" class="logo">
+    <div class="header-text">
+        <h1>TwitSent</h1>
+        <p>Twitter Sentiment Analyzer</p>
+    </div>
+</header>
+
+        <main class="main">
+            <div class="input-section">
+                <label for="tweetInput">Enter your tweet to analyze:</label>
+                <textarea 
+                    id="tweetInput" 
+                    placeholder="Enter your tweet here"
+                    rows="6"></textarea>
+            </div>
+
+            <button id="analyzeBtn" class="analyze-btn">Analyze Sentiment</button>
+
+            <!-- Result Section -->
+            <div id="resultSection" class="result-section">
+                <div id="emoji" class="sentiment-emoji"></div>
+                <div id="sentiment" class="sentiment-text"></div>
+                
+                
+                <div class="rating-container">
+                    <p class="rating-label">Sentiment Strength:</p>
+                    <div id="starRating" class="stars"></div>
+                </div>
+                
+                <div id="confidence" class="confidence-score"></div>
+                <div id="tweetPreview" class="tweet-preview"></div>
+            </div>
+        </main>
+
+        
+
+    <script src="js/script.js"></script>
+</body>
+</html>
