@@ -48,16 +48,16 @@ This project demonstrates end-to-end skills from data preprocessing to deploymen
 ## project images
 
 ### Main Interface
-(main-interface.png)
+![Main Interface](main-interface.png)
 
 ### Positive Sentiment Result
-(positive-result.png)
+![Positive Sentiment](positive-result.png)
 
-(positive-result1.png)
+![Positive Sentiment 2](positive-result1.png)
 
 ### Negative Sentiment Result
-(negative-result.png)
+![Negative Sentiment](negative-result.png)
 
-(negative-result1.png)
+![Negative Sentiment 2](negative-result1.png)
 
 
