@@ -43,16 +43,17 @@ def predict():
         cleaned_tweet = clean_text(tweet)
         vectorized = vectorizer.transform([cleaned_tweet])
         
+        # Get model prediction
         ml_prediction = model.predict(vectorized)[0]
         probability = model.predict_proba(vectorized)[0]
         ml_confidence = float(max(probability) * 100)
 
         lower_tweet = tweet.lower()
 
-       
+        # ================== IMPROVED NEGATIVE DETECTION ==================
         strong_negative = ['hate', 'terrible', 'awful', 'worst', 'horrible', 'disgusting', 
-                          'pathetic', 'useless', 'stupid', 'idiot', 'waste', 'sucks', 
-                          'ruined', 'angry', 'frustrated', 'bad', 'never', 'shit', 'fuck']
+                          'pathetic', 'useless', 'stupid', 'idiot', 'never', 'waste', 
+                          'bad', 'sucks', 'ruined', 'angry', 'frustrated']
 
         strong_positive = ['love', 'amazing', 'awesome', 'fantastic', 'excellent', 'best', 
                           'wonderful', 'perfect', 'happy', 'great']
@@ -60,20 +61,21 @@ def predict():
         neg_count = sum(1 for word in strong_negative if word in lower_tweet)
         pos_count = sum(1 for word in strong_positive if word in lower_tweet)
 
-       
-        if neg_count >= 1:
+        if neg_count >= 1 and neg_count > pos_count:
             sentiment = "Negative"
-            confidence = max(85, 95 if neg_count > 1 else 82)   
-        elif pos_count >= 2:
+            confidence = max(78, ml_confidence)
+        elif pos_count >= 1 and pos_count > neg_count:
             sentiment = "Positive"
-            confidence = max(80, ml_confidence)
-        elif "not " in lower_tweet and any(word in lower_tweet for word in ['good', 'great', 'like']):
-            sentiment = "Negative"
-            confidence = 88
+            confidence = max(78, ml_confidence)
         else:
-           
+            # If no strong keywords, trust the model more
             sentiment = "Positive" if ml_prediction == 1 else "Negative"
             confidence = ml_confidence
+
+        # Final adjustment for sarcasm / mild cases
+        if "not good" in lower_tweet or "not great" in lower_tweet or "quite bad" in lower_tweet:
+            sentiment = "Negative"
+            confidence = 82
 
         stars = round((confidence / 100) * 5)
 
