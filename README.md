@@ -16,7 +16,7 @@ This project demonstrates end-to-end skills from data preprocessing to deploymen
 - Modern  UI with Twitter-inspired design
 - Confidence percentage display
 - 5-Star sentiment strength rating
-- Hybrid prediction system (ML Model + Keyword Boosting) for better positive detection
+- Hybrid prediction system  for better positive detection
 
 
 ## 📊 Model Performance
