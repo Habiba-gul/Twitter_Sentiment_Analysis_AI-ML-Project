@@ -50,7 +50,6 @@ def predict():
 
         lower_tweet = tweet.lower()
 
-        # ================== IMPROVED NEGATIVE DETECTION ==================
         strong_negative = ['hate', 'terrible', 'awful', 'worst', 'horrible', 'disgusting', 
                           'pathetic', 'useless', 'stupid', 'idiot', 'never', 'waste', 
                           'bad', 'sucks', 'ruined', 'angry', 'frustrated']
