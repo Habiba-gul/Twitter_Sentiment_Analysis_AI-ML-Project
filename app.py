@@ -44,10 +44,15 @@ def predict():
         cleaned_tweet = clean_text(tweet)
         vectorized = vectorizer.transform([cleaned_tweet])
         
+<<<<<<< HEAD
+=======
+        # Get prediction from your ML model
+>>>>>>> 04662a78ad04b948a9158195e7fcaf3bc91be077
         ml_prediction = model.predict(vectorized)[0]
         probability = model.predict_proba(vectorized)[0]
         ml_confidence = float(max(probability) * 100)
 
+<<<<<<< HEAD
         lower_tweet = tweet.lower()
 
         # ================== STRONGER NEGATIVE DETECTION ==================
@@ -76,6 +81,32 @@ def predict():
             sentiment = "Positive" if ml_prediction == 1 else "Negative"
             confidence = ml_confidence
 
+=======
+        # --- Strong Rule-based Boost (This will fix the bias) ---
+        lower_tweet = tweet.lower()
+        
+        positive_keywords = ['love', 'loving', 'great', 'amazing', 'awesome', 'fantastic', 'excellent', 
+                           'good', 'nice', 'best', 'wonderful', 'happy', 'perfect', 'brilliant']
+        
+        negative_keywords = ['hate', 'bad', 'terrible', 'awful', 'worst', 'horrible', 'disappointed', 
+                           'sucks', 'stupid', 'useless']
+        
+        pos_count = sum(1 for word in positive_keywords if word in lower_tweet)
+        neg_count = sum(1 for word in negative_keywords if word in lower_tweet)
+
+        if pos_count > neg_count:
+            sentiment = "Positive"
+            confidence = max(75, ml_confidence)   # boost confidence
+        elif neg_count > pos_count:
+            sentiment = "Negative"
+            confidence = max(75, ml_confidence)
+        else:
+            # If no strong keywords, use ML model result
+            sentiment = "Positive" if ml_prediction == 1 else "Negative"
+            confidence = ml_confidence
+
+        # Final star rating
+>>>>>>> 04662a78ad04b948a9158195e7fcaf3bc91be077
         stars = round((confidence / 100) * 5)
 
         return jsonify({
